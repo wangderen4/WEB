@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS原生轮播图完整版</title>
+    <link rel="stylesheet" href="../css/carousel.css">
+</head>
+<body>
+    <!-- 
+        原生JS轮播 构建 原理 实现
+        重点罗列 技术要点
+        一、轮播图要素
+            1、无限滑动
+            2、翻页功能
+            3、页码跳转
+        二、轮播图的主要技术点
+            1、定时器
+            2、原生JS的DOM操作
+            3、CSS 动画
+            4、
+        三、轮播图主要实现流程
+            1、构建轮播图的内容结构 (N+1 解决最后一张与第一张的衔接)
+            2、使用定位实现轮播图的排列
+            3、使用定时器启动滑动 默认方向是向左方向
+            4、设置页码进行记录 (目的是 标记当前显示的是第几页)
+            5、对第一页和最后一页进行特殊处理
+        四、轮播图优化总结
+            1、按需加载
+            2、缩略图显示
+            3、对动画进行优化 (动画没有结束不能点)
+     -->
+    <div id="scroll">
+        <img src="../image/1.jpg" alt="123456">
+        <img src="../image/2.jpg" alt="">
+        <img src="../image/3.jpg" alt="">
+        <img src="../image/4.jpg" alt="">
+        <img src="../image/1.jpg" alt="123456">
+    </div>
+</body>
+<script>
+    var scroll = document.querySelector('#scroll');
+    var s_w =scroll.clientWidth;
+    var imgs = scroll.querySelectorAll('img');
+    for(var i = 0; i < imgs.length;i++) {
+        imgs[i].style.left = i*s_w + 'px';
+    }
+    function moveLeft() {
+        page++;
+        if(page > imgs.length - 1) {
+
+            page = 1;
+
+        }
+        move();
+    }
+    function move() {
+        for(var i = 0; i < imgs.length;i++) {
+        imgs[i].style.left = (i - page)*s_w + 'px';
+        }
+    }
+
+    var page = 0;
+    setInterval(moveLeft,1000);
+
+    
+</script>
+</html>
