@@ -11,11 +11,6 @@
     onclick  onload
     onclick 鼠标的单击事件
     ondbclick 鼠标的双击事件
-
-    
-
-        
-
 -->
 <div ondblclick="func()">双击事件</div>
 
@@ -31,27 +26,27 @@
         console.log('鼠标按下')
     }
 
-    div.onmouseup = function () {
-        console.log('鼠标弹起')
-    }
+    div.onmouseup = function () {  
+            console.log('鼠标弹起')
+        }
 
-    div.onmouseup = function () {
-        console.log('hover in')
-        console.log('鼠标进入')
-        this.style.backgroundColor = 'red'
-    }
+    // div.onmouseup = function () {
+    //     console.log('hover in')
+    //     console.log('鼠标进入')
+    //     this.style.backgroundColor = 'red'
+    // }
 
-    div.onmouseout = function () {
-        console.log('hover out')
-        console.log('鼠标移出')
-        this.style.backgroundColor = '#f60'
-    }
+    // div.onmouseout = function () {
+    //     console.log('hover out')
+    //     console.log('鼠标移出')
+    //     this.style.backgroundColor = '#f60'
+    // }
 
-    div.onmousemove = function () {
-        console.log('mouse move')
-        console.log('鼠标移动')
-        this.style.backgroundColor = 'green'
-    }
+    // div.onmousemove = function () {
+    //     console.log('mouse move')
+    //     console.log('鼠标移动')
+    //     this.style.backgroundColor = 'green'
+    // }
 
 </script>
 </html>

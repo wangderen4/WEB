@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2019.01.10 事件流作业</title>
+    <style>
+        html,body,input {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+           
+        }
+        body > div {
+            
+            margin-left: 50px;
+            margin-top: 50px;
+            width: 160px;
+            /* border: 1px solid black; */
+        }
+        input {
+            
+            height: 40px;
+            width: 160px;
+        }
+    </style>
+</head>
+<body>
+    <div id="show">
+        <input type="text" placeholder="输入文字">
+    </div>
+    
+    
+</body>
+<script>
+   
+
+    var show_el = document.querySelector('#show')
+    var input_el = document.querySelector('input')
+    input_el.onmouseover = function () {
+        for(var i = 0;i < 4;i++) {
+            var new_el = document.createElement('div')
+            new_el.index = i;
+            new_el.innerText = '班级' +(i+1);
+            console.log(new_el)
+
+            //样式
+            new_el.style.position = 'absolute';
+            new_el.style.height = 40 + 'px';
+            new_el.style.width = 160 +'px';
+            new_el.style.top = ((i+1)*40 + 60) + 'px';
+            new_el.style.margin = '10px 0 0 0';
+            new_el.style.textAlign = 'center';
+            new_el.style.lineHeight = 40 +'px';
+            new_el.style.border = '1px solid black';
+
+            show_el.appendChild(new_el);
+           
+            new_el.onclick = function (ev) {
+                var eve = event.target
+                console.log(eve)
+                input_el.value = eve.innerText;
+                console.log(input_el.value)
+            }
+        }   
+    }
+    // show_el.onmouseout = function () {
+    //     var de = show_el.querySelectorAll('div')//隐藏元素
+    //     de.style.display = 'none';
+    // }
+    
+
+</script>
+</html>
