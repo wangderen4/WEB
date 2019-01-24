@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+<body>
+    <button class="layui-btn layui-btn-danger layui-btn-lg" onclick="login()">登录</button>
+</body>
+<script src="js/cookie.js"></script>
+<script>
+    window.onload = function () {
+        main()
+    }
+
+    function main() {
+        
+    }
+
+    function login() {
+        // 原生JS 登录
+        var xhr = new XMLHttpRequest()
+        xhr.open('POST','/login')
+        xhr.onreadystatechange = function () {
+            if (4 == xhr.readyState && 200 == xhr.status) {
+                console.log(xhr.responseText)
+                var obj = JSON.parse(xhr.responseText)
+                if (!obj.err) {
+                    // 存储cookie
+                    setCookie('uuname','Tom',100)
+                    window.location.href = 'home.html'
+                }
+            }
+        }
+        xhr.send()
+    }
+</script>
+</html>

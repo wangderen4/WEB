@@ -1,93 +1,68 @@
-const fs = require('fs')
-// fs.open('./input.txt','a+',(err,fd)=>{
-//     if (err) {
-//         throw err
-//     }
-//     fs.readFile('./input.txt', (err, data) => {
-//         if (err) {
-//             throw err
-//         }
-//         fs.writeFile(fd, 'hello world2222',{flag:'a'},(err) => {
-//             if (err) {
-//                 throw err
-//             }
-//             console.log('写入成功')
-//         })
-//     })
-
-// })
-
-// fs.readFile('./input.txt', (err, data) => {
-//     if (err) {
-//         throw err
-//     }
-//     console.log(data.toString())
-//     fs.writeFile('./input.txt', 'hello world', {flag:'a'},(err) => {
-//         if (err) {
-//             throw err
-//         }
-//         console.log('写入成功')
-//     })
-// })
-
-fs.writeFile('./input.txt', 'hello world2222', {
-    flag: 'a'
-}, (err) => {
-    if (err) {
-        throw err
+// 1.反转字符串，也就是倒序
+function str_reverse(src) {
+    let new_str = '';
+    for(let i = src.length-1 ; i >=0 ; i--) {
+        new_str +=src[i];
     }
-    console.log('写入成功')
-})
+    return new_str;
+    // console.log(new_str);
+}
 
-// 1.作业1 能否封装一个 关于文件操作的 自定义模块
+// 2. 查找字符串str1中是否有s_str 如果有则返回s_str第一次出现的下标  str1表示倒序后的字符串 s_str 代表通过哪段字符串进行分割
+function str_index_of(str1,s_str) {
+    for(let i = 0 ; i < str_split.length; i++) {
+        if(str1[i] == s_str[0]) {
+            for(let j = 0 ; j < s_str.length; j++) {
+                if(str1[i + j] != s_str[j]) {
+                    break;
+                }
+            }
+        }
+    }
+    return -1
+}
 
-// 文件操作的其它API
-
-// 判断是否是 文件或者是目录
-fs.stat('./input.txt',(err,stats)=>{
-    if (err) {
-        throw err
+//3. 让字符串str1通过指定字符串s_str分割 并把单个元素倒序输出
+function str_split() {
+    //s = startindex 表示分隔符开始索引的下标
+    let s = 0;
+    let new_str;
+    for(let j =0; j <src.length;j++ ) {
+        i = str_index_of(s_str,s);
+        if (i != -1) {
+            new_str = src.substr(s,i-s);
+        }else{
+            new_str =src.substr(s);
+        }
+        s = i +s_str.length;
+        a_array.push(new_str);
     }
 
-    if (stats.isFile) {
-        //是文件
-        console.log('是文件')
-    }else if (stats.isDirectory) {
-        //是目录
-        console.log('是目录')
-    }   
-})
-
-// 创建目录
-// fs.mkdir('./myfloder/',err=>{
-//     if (err) {
-//         throw err
-//     }
-// })
-// fs.rmdir('./myfloder/',err=>{
-//     if (err) {
-//         throw err
-//     }
-// })
-// 读取一个文件夹
-fs.readdir('./homework/',(err,files)=>{
-    if (err) {
-        throw err
+    //把每个元素倒序，并把每个元素添加到数组中
+    let new_str1 ;
+    
+    for(let z = 0; z < a_array.length;z++) {
+        console.log(a_array);
+        // new_str1 = str_reverse(a_array[z]);
+        // console.log(new_str1);
+        // if(z < a_array.length - 1) {
+        //     last_str += new_str1+ ' ';
+        // }else{
+        //     last_str += new_str1;
+        // }
     }
-    console.log(files)
-})
+}
 
-// 删除文件
-fs.unlink('./homework/1122/1.js',err=>{
-    if (err) {
-        throw err
-    }
+var src = 'my name is Haodong Wang';
+var s_str = ' ';
+let last_str = '';
+var a_array= [] ,show_array = [];
+function func(src,s_str) {
+    str_reverse(src);
+    str_index_of(str_reverse(src),s_str);
+    str_split();
+   
+}
 
-})
-
-/* 总结
-Nodejs 文件系统模块fs 中方法均有 同步和异步版本
-异步版本的方法最后一个参数均为回调函数，利用这个回调函数去完成对应文件操作
-建议使用异步方法，因为它比同步性能更高，速度更快并且没有阻塞
-Nodejs  非阻塞I/O
-*/
+func(src,s_str);
+ console.log(last_str);

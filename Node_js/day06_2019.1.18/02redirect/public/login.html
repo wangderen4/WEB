@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+</head>
+<body>
+    <form id="login">
+        <input type="text" name="uname">
+        <input type="text" name="upasswd">
+        <input type="submit" value="登录">
+    </form>
+    <form action="/resgister">
+        <input type="submit" value="注册">
+    </form>
+    
+</body>
+<script>
+    var login = document.getElementById('login')
+    login.onsubmit = function() {
+        console.log('submit')
+        // alert('1')
+
+        // 获取用户名
+        let un = document.querySelector('#login>input[name="uname"]')
+        //获取用户名密码
+        let up = document.querySelector('#login>input[name="upasswd"]')
+
+        //判断用户名和密码是否有效
+        if(un.value.length == 0 || up.value.length == 0) {
+            un.style.border = '1px solid red'
+            up.style.border = '1px solid red'
+            return false
+        }
+
+        //用户名和密码 是否符合规则
+        //实现请求
+        // w3c规定 实现一个请求必须使用 XMLHTTPRequest 简称XHR对象
+        // XHR 又称为 页面局部刷新技术 学名 Ajax
+        //实现一个请求的流程
+
+        //正常情况下就 4 步
+        // 1. 创建一个请求对象 XHR对象
+        let xhr = new XMLHttpRequest()
+        // 2. 打开配置一个URL以及打开的方式
+        xhr.open('POST','/login')
+        //3. 监听请求和相应的过程
+        xhr.onreadystatechange = function () {
+            switch (xhr.readyState) {
+                case 0:
+                    console.log('0.请求未初始化')
+                    break;
+                case 1:
+                    console.log('1.服务器已建立连接')
+                    break;
+                case 2:
+                    console.log('2.请求已被接收')
+                    break;
+                case 3:
+                    console.log('3.请求处理中')
+                    break;
+                case 4:
+                    console.log('4.请求已完成，等待响应')
+                    console.log(xhr.responseText)
+                    // document.body.innerHTML = xhr.responseText
+                    let obj = JSON.parse(xhr.responseText)
+                    console.log(obj)
+                    if (!obj['err']) {
+                        alert(obj.msg)
+                        window.location.href = 'home.html'
+                    }else{
+                        alert(obj.msg)
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        // 4. 发送请求
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+        xhr.send("uname="+un.value+"&"+"upasswd="+up.value)
+        return false
+    }
+</script>
+</html>
